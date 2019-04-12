@@ -25,15 +25,15 @@ class UserController extends Controller
     public function items(Request $request)
     {
 
-        
+
         return User::with('role')->filter(Input::all())->orderBy('id', 'desc')->paginate(20);
-        
+
 
     }
 
     public function all(Request $request)
     {
-        
+
         return User::whereHas('role', function ($query) {
                 $query->where('name', 'administrator');
         })->get();
