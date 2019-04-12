@@ -18,50 +18,37 @@ class StudentController extends Controller
   public function all(Request $request)
   {
 
-      return User::whereHas('role', function ($query) {
-              $query->where('name', 'administrator');
-      })->get();
+      return Student
+      ->get();
   }
 
   public function item($id)
   {
 
-      return User::where('id', $id)
-          ->with([
-              'role',
-          ])->first();
-
+      return Student::where('id', $id)
+          ->first();
   }
 
 
   public function save(request $request)
   {
 
-
       $id = $request->get('id') ? $request->get('id') : 0;
 
-      $this->validate($request, [
-          'name' => 'required|string|max:255',
-          'password' => 'nullable|string|min:6|confirmed',
-          'email' => 'nullable|email',
-          'phone' => 'required',
-          'photo' => 'image64:jpeg,jpg,png',
-          'role_id' => 'required',
-      ]);
+      $student = $id ? Student::find($id) : new Student();
 
-
-      $user = $id ? User::find($id) : new User();
-
-      $user->name = $request->get('name');
-      $user->email = $request->get('email');
-      $user->phone = $request->get('phone');
-      $user->role_id = $request->get('role_id');
-      if($request->get('photo'))
-          $user->photo = $request->get('photo');
-      if($request->get('password'))
-          $user->password = bcrypt($request->get('password'));
-      $nocrypt=$request->get('password');
+      $student->name = $request->get('name');
+      $student->email = $request->get('email');
+      $student->phone = $request->get('phone');
       $user->save();
+
+  }
+
+  public function delete($id)
+  {
+
+      $student = Student::find($id);
+      Student::destroy($id);
 
   }
 }

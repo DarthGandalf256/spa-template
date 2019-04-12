@@ -18,6 +18,7 @@ import Chartkick from 'chartkick';
 import VueChartkick from 'vue-chartkick';
 import Auth from './packages/auth/auth';
 import User from './packages/user';
+import Student from './packages/student'
 import { VueMaskDirective } from 'v-mask';
 
 const dateLocales = Vue.prototype.$dateLocales = {
@@ -68,6 +69,7 @@ Vue.use(BootstrapVue);
 Vue.use(VueRouter);
 Vue.use(Auth);
 Vue.use(User);
+Vue.use(Student);
 Vue.use(VTooltip);
 Vue.directive('mask', VueMaskDirective);
 
@@ -186,5 +188,3 @@ const app = new Vue({
     }
 
 }).$mount('#app');
-
-

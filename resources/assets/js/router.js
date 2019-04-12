@@ -6,6 +6,8 @@ const Users = require('./views/users/List.vue');
 const User = require('./views/users/Item.vue');
 const PermissionDenied = require('./views/system/PermissionDenied.vue');
 const NotFound = require('./views/system/NotFound.vue');
+const Students = require('./views/students/List.vue');
+const Student = require('./views/students/Item.vue')
 
 const Login = require('./views/common/Login.vue');
 const SelectAccount = require('./views/common/SelectAccount.vue');
@@ -31,6 +33,9 @@ export default new VueRouter({
         { name: 'control', path: '/control', component: Control, meta: {title: 'Управление', forAuth: true} },
          { name: 'users', path: '/control/users', component: Users, meta: {title: 'Пользователи', forAuth: true} },
         { path: '/control/user/:id', name: 'user', component: User, props:true, meta: {title: 'Пользователь', forAuth: true} },
+
+          { name: 'students', path: '/control/students', component: Students, meta: {title: 'Студенты', forAuth: true}},
+        { path: '/control/student/:id', name: 'student', component: Student, props: true, meta: {title: 'Студент', forAuth: true}},
 
         { path: '/401', component: PermissionDenied},
         { path: '*', component: NotFound},
